@@ -1,11 +1,14 @@
 export type LeaveType = 'Annual Leave' | 'Casual/Medical Leave' | 'Lieu Leave';
 export type LeaveStatus = 'Pending' | 'Approved' | 'Rejected';
 export type DateMode = 'single' | 'range';
-export type DayLength = 'full' | 'half';
-export type Shift = 'morning' | 'evening';
+export type DayLength = 'full' | 'firstHalf' | 'secondHalf';
 
 export interface LeaveRequest {
+  employeeId: number;
   id: number;
+  employee: {
+    displayName: string;
+  };
   employeeName: string;
   leaveType: LeaveType;
   reason: string;
@@ -14,8 +17,18 @@ export interface LeaveRequest {
   to?: string;
   duration?: number;
   dayLength?: DayLength;
-  shift?: Shift;
   status: LeaveStatus;
   createdAt?: string;
   updatedAt?: string;
+  selectedHalf?: 'first' | 'second';
+}
+
+
+
+export interface User {
+  id:number;
+  username: string;
+  password: string;
+  displayName: string;
+  role: "admin" | "employee";
 }
